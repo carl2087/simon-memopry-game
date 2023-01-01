@@ -39,6 +39,7 @@ describe("newGame works correctly", () => {
         game.playerMoves = ["button1", "button2"];
         game.currentGame = ["button1", "button2"];
         document.getElementById("score").innerText = "42";
+        game.turnNumber = 42;
         newGame();
     });
     test("should set game score to zero", () => {
@@ -53,7 +54,17 @@ describe("newGame works correctly", () => {
     test("should display zero for element with id of score", () => {
         expect(document.getElementById("score").innerText).toEqual(0);
     });
-})
+    test("should set turnNumber to zero", () => {
+        expect(game.turnNumber).toEqual(0);
+    });
+    test("expect data-listener to be true", () => {
+        newGame();
+        const elements = document.getElementsByClassName("circle");
+        for (let element of elements) {
+            expect(element.getAttribute("data-listener")).toEqual("true");
+        };
+    });
+});
 
 describe("gameplay works correctly", () => {
     beforeEach(() => {
